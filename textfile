@@ -1,0 +1,176 @@
+# SIH26083 – Extreme Weather Early Warning & Human Thermal Stress Index
+
+## Our Idea
+
+We are building an **AI-powered hyperlocal extreme-weather and human thermal-stress early-warning system** that goes far beyond traditional weather apps. Instead of just showing temperature and forecasts, our platform calculates **how dangerous current and upcoming weather conditions are for specific individuals and vulnerable groups** — answering the critical question: **"Who is in danger, where are they, how serious is the risk, when will it become dangerous, and what action should they take?"**
+
+Our system ingests **multi-source weather data** (temperature, humidity, wind speed, air quality, UV index, solar radiation) and combines it with **personalized user profiles** (age group, occupation, indoor/outdoor status, activity level, health vulnerabilities) to generate a **dynamic Human Thermal Stress/Risk Score**.
+
+For example, at **42°C ambient temperature**, the risk level differs drastically for:
+- A **student** sitting indoors with a fan → **Moderate risk**
+- A **farmer** working in open fields → **Critical risk**
+- A **construction worker** on a concrete site → **High to Critical risk**
+- An **elderly person** with comorbidities → **Critical risk**
+
+The system classifies situations as **🟢 Safe / 🟡 Moderate / 🟠 High / 🔴 Critical** and delivers **personalized early warnings** before dangerous conditions occur.
+
+***
+
+## How Azure Powers Our Solution
+
+| Azure Service | Role in Our System |
+|---------------|--------------------|
+| **Azure Maps + Weather APIs** | Hyperlocal weather forecasts, GPS-based location services, and interactive geographic visualization |
+| **Azure Machine Learning** | Predictive AI models for thermal-stress forecasting (3–5 days ahead) using historical heat-mortality and hospitalization data |
+| **Azure Functions** | Serverless automation to process incoming weather streams and calculate real-time risk scores |
+| **Azure Event Hubs** | Ingest real-time data from IoT weather stations, wearable sensors, and satellite feeds |
+| **Azure AI Foundry** | Generate **explainable, context-aware safety recommendations** in regional languages (e.g., "Shift work to 6–9 AM; open cooling centers in Ward 12") |
+| **Azure Cosmos DB / SQL** | Store historical weather patterns, user risk profiles, alert logs, and model training datasets |
+| **Azure Maps Dashboard** | Create **colour-coded thermal risk heatmaps** (🟢🟡🟠🔴) for government authorities at ward/street level |
+| **Azure Notification Hubs + Communication Services** | Send **SMS, WhatsApp, IVR calls** in Hindi, Tamil, Telugu, etc., to farmers, outdoor workers, and elderly citizens |
+
+***
+
+## Complete End-to-End Workflow
+
+```
+Weather APIs + GPS + IoT Sensors
+        ↓
+Real-Time Data Ingestion (Event Hubs)
+        ↓
+Thermal Stress Calculation (WBGT, UTCI, EHI-N*)
+        ↓
+AI Risk Prediction (Azure ML – 3–5 day forecast)
+        ↓
+Personalized Risk Scoring (Age × Occupation × Activity × Exposure)
+        ↓
+Future Risk Forecast (Time-to-Critical Alerts)
+        ↓
+Dynamic Geographic Heatmap (100–500m grid resolution)
+        ↓
+Multi-Channel Alerts (App, SMS, WhatsApp, IVR)
+        ↓
+Actionable Safety Recommendations (Azure AI Foundry)
+        ↓
+Government Decision-Support Dashboard (Azure Maps)
+```
+
+***
+
+## What Makes Our Project Different
+
+Most weather systems broadcast generic alerts like **"43°C – heatwave warning"** to everyone. Our system delivers **precision public health intelligence**:
+
+> **"Between 1–4 PM tomorrow, Ward 7 will reach Critical Thermal Stress (UTCI 42). Outdoor construction workers and elderly residents have the highest risk. Recommended actions: Shift work hours to 6–9 AM, open cooling centers near Market Road, and issue SMS alerts in Hindi and Telugu."**
+
+This transforms our platform from a **weather app** into an **AI-based decision-support and early-warning system** for citizens, workers, and government authorities.
+
+***
+
+## Key Innovations Integrated
+
+### 1. Multi-Dimensional Personalization Engine
+- **User Profile Matrix**: Age (child, adult, elderly), occupation (farmer, construction, delivery, student), activity level (sedentary, moderate, heavy), exposure (indoor AC, indoor non-AC, outdoor shade, outdoor sun).
+- **Composite Risk Index**: Combines **UTCI (Universal Thermal Climate Index)**, **WBGT (Wet Bulb Globe Temperature)**, and **EHI-N*** (Extended Heat Index for metabolic rates) with **AQI, UV index, and solar radiation**.
+- **Example**: "42°C, 65% humidity, low wind → UTCI 38 (Very Strong Stress). For a 68-year-old farmer: **Critical**. For a 22-year-old student indoors: **Moderate**."
+
+### 2. Predictive + Prescriptive AI (Not Just Descriptive)
+- **Azure ML models** trained on IMD/NCMRWF historical data predict **ward-level risk 3–5 days in advance**.
+- **Time-to-Critical Alerts**: "This location will enter 🔴 Critical zone in 2.5 hours."
+- **Azure AI Foundry** generates **explainable, actionable recommendations**: "Risk peaks at 2 PM due to solar radiation + low wind. Suggested: Open cooling centers in Ward 12; reschedule outdoor school activities."
+
+### 3. Hyperlocal Resolution (100–500m Grids)
+- Unlike district-level systems (e.g., SHRAM), we achieve **street/ward-level granularity** using **Azure Maps + satellite data + local weather stations**.
+- Captures **urban heat islands**: "Your street is 3°C hotter than the park 400m away due to lack of tree cover."
+
+### 4. Two-Sided Platform: Citizen App + Government Dashboard
+- **Citizen Side**: Mobile app + **SMS/WhatsApp/IVR alerts** in **10+ regional languages** for rural accessibility.
+- **Government Side**: Azure Maps dashboard with:
+  - Colour-coded heatmaps by ward
+  - Vulnerable population overlays (elderly density, outdoor worker clusters)
+  - **Automated triggers** for heat-action plans (e.g., "Ward 7 crosses 35°C WBGT → auto-notify municipal commissioner")
+
+### 5. Real-Time + Historical Learning Loop
+- All risk scores, alerts, and outcomes stored in **Cosmos DB**.
+- **Monthly model retraining** improves accuracy (e.g., "Over-predicted risk in shaded markets → adjust radiant heat coefficient").
+- **Transparency reports**: "Last summer: 1,200 early warnings issued; 94% matched actual heat-stress hospitalizations."
+
+### 6. Low-Tech Accessibility (SMS/IVR for Rural Workers)
+- **Twilio/Azure Communication Services** integration for:
+  - **SMS alerts**: "Heat alert: Critical risk 1–4 PM. Rest in shade, drink 250ml water every 30 min."
+  - **IVR calls** in local languages for farmers (like Kisan Call Centers).
+
+### 7. Integration with Government Systems
+- Aligned with **IMD's impact-based forecasts** and **NDMA heat-action plans**.
+- **API hooks** for state disaster cells to pull risk scores into existing dashboards.
+
+***
+
+## Dynamic Thermal Risk Map
+
+We introduce a **real-time, colour-coded Thermal Risk Map** where each area is classified as:
+- 🟢 **Safe** (UTCI < 26)
+- 🟡 **Moderate** (UTCI 26–32)
+- 🟠 **High** (UTCI 33–38)
+- 🔴 **Critical** (UTCI > 38)
+
+Government authorities can instantly identify **high-risk zones** and prioritize interventions for **farmers, construction workers, elderly residents, school students, and outdoor workers**.
+
+***
+
+## Predictive Warning System
+
+Instead of alerting **after** extreme heat occurs, our AI forecasts **when and where** critical thermal-stress conditions will develop:
+
+> **"Between 1–4 PM tomorrow, this area is predicted to reach Critical Thermal Stress. Outdoor construction workers and elderly people have the highest risk. Reduce outdoor exposure, hydrate frequently, and authorities should issue an early warning."**
+
+***
+
+## Regional Language Support
+
+All alerts and recommendations are available in **Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Odia, and Punjabi**, ensuring **rural workers and non-English speakers** are not left behind.
+
+***
+
+## Main Innovation: From Generic to Precision Public Health
+
+| Traditional Weather App | Our AI-Powered System |
+|-------------------------|------------------------|
+| "Tomorrow will be 42°C." | "Between 1–4 PM tomorrow, Ward 7 will reach Critical Thermal Stress. Outdoor construction workers and elderly residents have the highest risk. Shift work to 6–9 AM, open cooling centers, and issue SMS alerts in Hindi." |
+
+This makes our project **more than a weather application** — it is an **AI-driven life-saving decision-support platform** for **citizens, workers, and government authorities**.
+
+***
+
+## Our Competitive Advantage
+
+- **Working Azure Prototype**: We have **Azure credits**, enabling us to build a **fully functional cloud system** with AI prediction, live maps, real-time processing, and multi-channel alerts — not just a UI mockup.
+- **End-to-End Integration**: No other system combines **hyperlocal prediction + personalized risk + predictive AI + government heatmap + regional language alerts** in one platform.
+- **Scalable Architecture**: Built on Azure's serverless infrastructure, ready to scale from **one city to 100+ Indian districts**.
+
+***
+
+## Winning Factor
+
+> **Hyperlocal Prediction + Personalized Human Risk + AI Early Warning + Government Heatmap + Actionable Recommendations + Regional Language Alerts**  
+> **All working together in one production-ready Azure-powered system.**
+
+***
+
+## Innovation Scorecard vs. Existing Systems
+
+| Feature | SHRAM | Ignivis | UrbanAIR | **Our System** |
+|--------|-------|---------|----------|----------------|
+| District-level heat stress | ✅ | ❌ | ❌ | ✅ |
+| **Ward/street-level (hyperlocal)** | ❌ | ❌ | ✅ (1 city) | ✅ (multi-city) |
+| **Personalized by age + occupation + activity** | Partial (workers only) | ✅ (via CV) | ❌ | ✅ (full matrix) |
+| **Predictive (3–5 days ahead)** | ✅ (1–7 days) | ❌ | ❌ | ✅ |
+| **Government heatmap dashboard** | ✅ | ❌ | ✅ (research) | ✅ (production-ready) |
+| **Regional language SMS/IVR** | ❌ | ❌ | ❌ | ✅ |
+| **Explainable AI recommendations** | ❌ | Partial | ❌ | ✅ (Azure AI Foundry) |
+| **Real-time + historical learning** | Partial | ❌ | ❌ | ✅ |
+| **End-to-end cloud prototype (Azure)** | ❌ | ❌ | ❌ | ✅ |
+
+***
+
+This is your **final, competition-ready project description** — comprehensive, innovative, and aligned with SIH26083's objectives. It positions your team as building **India's first precision public health platform for extreme heat**, leveraging Azure's full cloud-AI stack.
