@@ -342,3 +342,4 @@ The Function App uses a consumption plan. A request after a period of inactivity
 - WhatsApp and IVR require an approved external provider integration.
 - API authentication and role-based access must be enabled before public production use.
 - The risk calculations are decision-support estimates and are not a medical diagnosis.
+"# Weather-App" 
