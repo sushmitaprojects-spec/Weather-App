@@ -188,9 +188,9 @@ export default function CitizenView({ currentLang, onTriggerAlertModal }) {
               <ToggleGroup
                 value={ageGroup} onChange={setAgeGroup} accentClass="active-amber"
                 options={[
-                  { id: 'child',   label: '👶 Child (0–12)' },
-                  { id: 'adult',   label: '🧑 Adult (13–59)' },
-                  { id: 'elderly', label: '👴 Senior (60+)' }
+                  { id: 'child',   label: `👶 ${t.child || 'Child (0–12)'}` },
+                  { id: 'adult',   label: `🧑 ${t.adult || 'Adult (13–59)'}` },
+                  { id: 'elderly', label: `👴 ${t.elderly || 'Senior (60+)'}` }
                 ]}
               />
             </div>
@@ -202,7 +202,7 @@ export default function CitizenView({ currentLang, onTriggerAlertModal }) {
                 <option value="construction" style={{ background: '#0E1626' }}>🏗️ {t.occ_construction || 'Construction Worker'}</option>
                 <option value="farmer"       style={{ background: '#0E1626' }}>🌾 {t.occ_farmer       || 'Farmer'}</option>
                 <option value="delivery"     style={{ background: '#0E1626' }}>🛵 {t.occ_delivery     || 'Delivery Rider'}</option>
-                <option value="indoor_non_ac"style={{ background: '#0E1626' }}>🏭 {t.occ_indoor_non_ac|| 'Factory Worker (non-AC)'}</option>
+                <option value="indoor_non_ac" style={{ background: '#0E1626' }}>🏭 {t.occ_indoor_non_ac || 'Factory Worker (non-AC)'}</option>
                 <option value="student"      style={{ background: '#0E1626' }}>🎓 {t.occ_student      || 'Student / Indoor'}</option>
                 <option value="elderly"      style={{ background: '#0E1626' }}>🏠 {t.occ_elderly      || 'Senior Resident'}</option>
               </select>
@@ -214,9 +214,9 @@ export default function CitizenView({ currentLang, onTriggerAlertModal }) {
               <ToggleGroup
                 value={activityLevel} onChange={setActivityLevel} accentClass="active-orange"
                 options={[
-                  { id: 'sedentary', label: '💺 Low' },
-                  { id: 'moderate',  label: '🚶 Moderate' },
-                  { id: 'heavy',     label: '⛏️ Heavy' }
+                  { id: 'sedentary', label: `💺 ${t.act_sedentary || 'Low / Sedentary'}` },
+                  { id: 'moderate',  label: `🚶 ${t.act_moderate || 'Moderate Exertion'}` },
+                  { id: 'heavy',     label: `⛏️ ${t.act_heavy || 'Heavy Manual Labor'}` }
                 ]}
               />
             </div>
@@ -226,10 +226,10 @@ export default function CitizenView({ currentLang, onTriggerAlertModal }) {
               <label style={{ display: 'block', fontSize: 11, fontWeight: 600, color: '#8A9BC0', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>{t.exposureType || 'Environment'}</label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
                 {[
-                  { id: 'indoor_ac',     label: '❄️ Indoor (AC)' },
-                  { id: 'indoor_non_ac', label: '🪟 Indoor (Fan)' },
-                  { id: 'outdoor_shade', label: '🌳 Outdoor Shade' },
-                  { id: 'outdoor_sun',   label: '☀️ Direct Sunlight' }
+                  { id: 'indoor_ac',     label: `❄️ ${t.exp_indoor_ac || 'Indoor (AC)'}` },
+                  { id: 'indoor_non_ac', label: `🪟 ${t.exp_indoor_non_ac || 'Indoor (Fan)'}` },
+                  { id: 'outdoor_shade', label: `🌳 ${t.exp_outdoor_shade || 'Outdoor Shade'}` },
+                  { id: 'outdoor_sun',   label: `☀️ ${t.exp_outdoor_sun || 'Direct Sunlight'}` }
                 ].map(o => (
                   <button key={o.id} onClick={() => setExposure(o.id)}
                     className={`pill-btn ${exposure === o.id ? 'active-cyan' : ''}`}
@@ -246,7 +246,7 @@ export default function CitizenView({ currentLang, onTriggerAlertModal }) {
                 <input type="checkbox" checked={hasComorbidities} onChange={e => setHasComorbidities(e.target.checked)} />
                 <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#C0CDE0' }}>
                   <HeartPulse size={13} color="#F87171" />
-                  <span>Hypertension / Cardiac / Diabetes (Comorbidities)</span>
+                  <span>{t.comorbidities || 'Hypertension / Cardiac / Diabetes (Comorbidities)'}</span>
                 </span>
               </label>
             </div>

@@ -27,38 +27,38 @@ export default function Header({ currentLang, setCurrentLang, activeTab, setActi
           </div>
           <div>
             <div style={{ fontWeight: 700, fontSize: 15, color: '#F0F4FF', lineHeight: 1.2 }}>
-              ThermalGuard AI
+              {t.appTitle || "ThermalGuard AI"}
             </div>
             <div style={{ fontSize: 11, color: '#4D6080', fontFamily: 'JetBrains Mono, monospace' }}>
-              SIH26083 · Extreme Weather Early Warning
+              {t.subTitle || "SIH26083 · Extreme Weather Early Warning"}
             </div>
           </div>
-        </div>
+          </div>
 
-        {/* Live Status Pill */}
-        <div style={{
+          {/* Live Status Pill */}
+          <div style={{
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '4px 10px', borderRadius: 100,
           background: 'rgba(16, 185, 129, 0.08)',
           border: '1px solid rgba(16, 185, 129, 0.25)',
           marginLeft: 8
-        }}>
+          }}>
           <span className="live-dot"></span>
           <span style={{ fontSize: 11, color: '#10B981', fontWeight: 600, fontFamily: 'JetBrains Mono, monospace' }}>
-            Azure Stream Live
+            {t.liveStatus || "Azure Stream Live"}
           </span>
-        </div>
+          </div>
 
-        {/* Spacer */}
-        <div style={{ flex: 1 }}></div>
+          {/* Spacer */}
+          <div style={{ flex: 1 }}></div>
 
-        {/* Tab Switcher */}
-        <div style={{
+          {/* Tab Switcher */}
+          <div style={{
           display: 'flex', alignItems: 'center', gap: 2,
           background: 'rgba(0,0,0,0.3)',
           border: '1px solid rgba(255,255,255,0.07)',
           borderRadius: 10, padding: 3
-        }}>
+          }}>
           <button
             onClick={() => setActiveTab('citizen')}
             style={{
@@ -75,7 +75,7 @@ export default function Header({ currentLang, setCurrentLang, activeTab, setActi
             }}
           >
             <Users size={13} />
-            Citizen View
+            {t.citizenTab || "Citizen View"}
           </button>
           <button
             onClick={() => setActiveTab('govt')}
@@ -93,9 +93,9 @@ export default function Header({ currentLang, setCurrentLang, activeTab, setActi
             }}
           >
             <Building2 size={13} />
-            Govt Dashboard
+            {t.govtTab || "Govt Dashboard"}
           </button>
-        </div>
+          </div>
 
         {/* Language Selector */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
